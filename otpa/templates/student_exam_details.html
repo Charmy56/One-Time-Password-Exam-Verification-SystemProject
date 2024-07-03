@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Details</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            margin-bottom: 0;
+        }
+        .h1 {
+            text-align: center;
+            text-decoration: solid;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Information</h1>
+        <img src="{{ otp_record.student.profile_photo.url }}" alt="Student Photo" class="img-fluid">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{{ otp_record.student.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration Number</th>
+                    <td>{{ otp_record.student.student_id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Year of Study</th>
+                    <td>{{ otp_record.year_of_study }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Department</th>
+                    <td>{{ otp_record.student.department }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Exam Details</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Unit Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in otp_record.exam.units.all %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ unit.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and jQuery CDN (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-T9BEK3GDqgyiZM0VfWq2BxamZI7IHTZGNf+5ajjC8gMpndS6ZnZu8a02P1IjNFeV" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-ZkQm5nFUlOeL7YkUtMnji3Uy6sSzdMigwJ8Zl3gx0x5STsz/8M3GCD5iYRT5+9xS" crossorigin="anonymous"></script>
+</body>
+</html>

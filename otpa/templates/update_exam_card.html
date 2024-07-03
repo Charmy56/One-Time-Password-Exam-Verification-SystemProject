@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Exam Card</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Update Exam Card</h1>
+
+        <!-- Display messages -->
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="student">Student</label>
+                <input type="text" name="student" id="student" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="exam">Exam</label>
+                <input type="text" name="exam" id="exam" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="issued">Issued</label>
+                <input type="checkbox" name="issued" id="issued" class="form-check-input">
+            </div>
+            <div class="form-group">
+                <label for="otp_code">OTP Code</label>
+                <input type="text" name="otp_code" id="otp_code" class="form-control" required>
+            </div>
+            <!-- Add more form fields here as needed -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

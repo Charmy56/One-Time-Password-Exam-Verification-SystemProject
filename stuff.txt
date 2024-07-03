@@ -1,0 +1,2 @@
+we already created an admin account using superuser,so no need to register the admin using 127.0.0.1:8000/register using role SystemAdmin...we can access it using 127.0.0.1:8000/admin
+but when we login using 127.0.0.1/login the system will identify role and log us in like this ,is this the latest one..its supost to take us to 127.0.0.1:8000/admin ,i think for systemadmin will use for superuser we created using python manage.py createsuperuser,like user2024,hii code latest ama ebu kiasi

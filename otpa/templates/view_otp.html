@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View OTP</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>OTP Details</h1>
+        <p><strong>Student Name:</strong> {{ otp_record.student.name }}</p>
+        <p><strong>Registration Number:</strong> {{ otp_record.student.student_id }}</p>
+        <p><strong>Year of Study:</strong> {{ otp_record.student.year_of_study }}</p>
+        <p><strong>Department:</strong> {{ otp_record.student.department }}</p>
+        <p><strong>Unit Name:</strong> {{ otp_record.exam.unit_name }}</p>
+        <p><strong>Exam Code:</strong> {{ otp_record.exam.exam_code }}</p>
+        <!-- Add more details as needed -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #1569f0;">
+        <div class="container">
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Welcome to the Lecturer Dashboard!</h1>
+        
+        <!-- List of OTP Records -->
+        <h2>OTP Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Exam</th>
+                        <th>OTP Code</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over OTP records and display them in rows -->
+                    {% for otp_record in otp_records %}
+                        <tr>
+                            <td>{{ otp_record.student.name }}</td>
+                            <td>{{ otp_record.exam.exam_name }}</td>
+                            <td>{{ otp_record.otp_code }}</td>
+                            <td>{% if otp_record.verified %} Verified {% else %} Not Verified {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- List of Student Records -->
+        <h2>Student Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Department</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over student records and display them in rows -->
+                    {% for student_record in student_records|slice:":10" %}
+                        <tr>
+                            <td>{{ student_record.name }}</td>
+                            <td>{{ student_record.department }}</td>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- List of Exam Records -->
+        <h2>Exam Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Exam Name</th>
+                        <th>Date</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over exam records and display them in rows -->
+                    {% for exam_record in exam_records|slice:":10" %}
+                        <tr>
+                            <td>{{ exam_record.exam_name }}</td>
+                            <td>{{ exam_record.exam_date }}</td>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Charts -->
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Chart 1: Student Distribution by Department</h2>
+                <canvas id="studentDistributionChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h2>Chart 2: Exam Results</h2>
+                <canvas id="examResultsChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Sample data for charts
+        const departments = ['Computer Science', 'Mathematics', 'Physics', 'Biology', 'Chemistry'];
+        const studentCounts = [150, 120, 90, 80, 70];
+
+        const examLabels = ['A', 'B', 'C', 'D', 'F'];
+        const examResults = [30, 45, 60, 70, 20];
+
+        // Chart 1: Student Distribution by Department
+        const studentDistributionCtx = document.getElementById('studentDistributionChart').getContext('2d');
+        const studentDistributionChart = new Chart(studentDistributionCtx, {
+            type: 'bar',
+            data: {
+                labels: departments,
+                datasets: [{
+                    label: 'Student Count',
+                    data: studentCounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Exam Results
+        const examResultsCtx = document.getElementById('examResultsChart').getContext('2d');
+        const examResultsChart = new Chart(examResultsCtx, {
+            type: 'bar',
+            data: {
+                labels: examLabels,
+                datasets: [{
+                    label: 'Number of Students',
+                    data: examResults,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

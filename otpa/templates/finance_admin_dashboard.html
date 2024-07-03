@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .navbar {
+            background-color: #343a40; /* Dark navbar background */
+        }
+        .navbar-brand {
+            font-size: 1.5rem; /* Larger font size for the brand */
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: #ffffff; /* White color for the links */
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ced4da; /* Light gray color on hover */
+        }
+        h1, h2 {
+            color: #343a40; /* Dark text color */
+        }
+        .table th, .table td {
+            vertical-align: middle; /* Align table content vertically */
+        }
+        .table-responsive {
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+        .table th {
+            white-space: nowrap; /* Prevent text wrapping in table header */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark "  style="background-color: #1569f0;">
+        <div class="container">
+            <a class="navbar-brand" href="#">Finance Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'verify_otp' %}">Verify OTP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'update_fee_records' %}">Update Fee Records</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Welcome to the Finance Dashboard!</h1>
+        
+        <!-- Fee Records Table -->
+        <h2>Fee Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over fee records and display them in rows -->
+                    {% for fee_record in fee_records %}
+                        <tr>
+                            <td>{{ fee_record.student.name }}</td>
+                            <td>{{ fee_record.amount }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Student Records Table -->
+        <h2>Student Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over student records and display them in rows -->
+                    {% for student_record in student_records|slice:":10" %}
+                        <tr>
+                            <td>{{ student_record.name }}</td>
+                            <td>{{ student_record.department }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Exam Records Table -->
+        <h2>Exam Records</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Exam Name</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over exam records and display them in rows -->
+                    {% for exam_record in exam_records|slice:":10" %}
+                        <tr>
+                            <td>{{ exam_record.exam_name }}</td>
+                            <td>{{ exam_record.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
